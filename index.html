@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EHB | Imposter Hub v2.4</title>
+    <title>EHB | Imposter Hub v2.5</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -19,10 +19,9 @@
         #capture-area { flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto; background: #fff; position: relative; width: 100%; }
         .editable { outline: none; }
 
-        /* 🔋 Sleek iOS Status Bar */
+        /* 🔋 Dynamic iOS Status Bar */
         .status-bar { display: flex; justify-content: space-between; padding: 10px 18px; background: #fff; color: #000; font-size: 14px; font-weight: 700; align-items: center; flex-shrink: 0; }
         .sb-right { display: flex; align-items: center; gap: 5px; }
-        
         .bat-pill { background: #e5e5ea; border-radius: 12px; padding: 2px 5px; display: flex; align-items: center; gap: 2px; position: relative; min-width: 42px; height: 18px; overflow: hidden; }
         .bat-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--ios-green); transition: width 0.3s ease; z-index: 1; }
         .bat-text-wrap { position: relative; z-index: 2; display: flex; align-items: center; gap: 1px; color: #fff; font-size: 11px; font-weight: 800; }
@@ -30,13 +29,15 @@
         /* --- IMPOSTER CONTENT --- */
         .imp-header { background: #000; color: #fff; padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; }
         
+        /* 🛠️ META BOX FIX (Force One Line) */
         .imp-meta { background: #f1f3f4; padding: 8px 18px 15px 18px; border-bottom: 1px solid #ddd; position: relative; color: #000; }
         .timestamp { font-size: 13px; color: #5f6368; position: absolute; right: 18px; top: 8px; text-align: right; }
+        .meta-title { font-weight: bold; font-size: 16px; margin-top: 5px; padding-right: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
         
         .imp-body { padding: 25px 15px; color: #000; }
         
-        /* 🛠️ FIXED SINGLE LINE HEADER */
-        .single-line-head { font-size: 20px; font-weight: 900; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 15px; width: 100%; }
+        /* 🛠️ MAIN BODY HEADER FIX (Force One Line) */
+        .single-line-head { font-size: 20px; font-weight: 900; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 15px; width: 100%; display: block; }
         
         .fb-link { color: var(--fb-blue); text-decoration: none; word-break: break-all; font-weight: 500; }
 
@@ -61,9 +62,9 @@
                     <i class="fas fa-signal" style="font-size: 12px;"></i>
                     <span style="font-size: 12px; font-weight: 900;">4G</span>
                     <div class="bat-pill">
-                        <div id="fill" class="bat-fill" style="width: 59%;"></div>
+                        <div id="fill" class="bat-fill" style="width: 69%;"></div>
                         <div class="bat-text-wrap">
-                            <span id="perc" class="editable" contenteditable="true" oninput="updBat()">59</span>
+                            <span id="perc" class="editable" contenteditable="true" oninput="updBat()">69</span>
                             <i class="fas fa-bolt" style="font-size: 9px;"></i>
                         </div>
                     </div>
@@ -77,7 +78,7 @@
 
             <div class="imp-meta">
                 <div class="timestamp editable" contenteditable="true">23:54 (7 Second Ago)</div>
-                <div class="editable" contenteditable="true" style="font-weight:bold; font-size:16px; margin-top:5px; padding-right:120px;">Thank you for submitting your ID</div>
+                <div class="meta-title editable" contenteditable="true">Thank you for submitting your ID</div>
                 <div class="editable" contenteditable="true" style="font-size:14px; margin-top:4px;">To: didarkhan@haren.uk</div>
                 <div class="editable" contenteditable="true" style="font-size:14px; margin-top:2px;">From: Facebook &lt;noreply@support.facebook.com&gt;</div>
             </div>
@@ -96,13 +97,11 @@
                 </div>
                 <br>
                 <div class="editable" contenteditable="true" style="font-weight:bold; font-size:15.5px;">Thanks,<br>The Facebook Team</div>
-                
-                <div style="margin-top:40px; color:#ddd;"><i class="far fa-comment-dots" style="font-size:24px;"></i></div>
             </div>
         </div>
 
         <div class="footer-nav">
-            <button class="save-btn" onclick="save()">📸 SAVE FULL SCREENSHOT (v2.4)</button>
+            <button class="save-btn" onclick="save()">📸 SAVE FULL SCREENSHOT (v2.5)</button>
         </div>
     </div>
 
@@ -114,7 +113,6 @@
             } else { alert("ACCESS DENIED!"); }
         }
         
-        // 🔋 Smart Battery Level
         function updBat() {
             let val = parseInt(document.getElementById('perc').innerText);
             if(!isNaN(val) && val >= 0 && val <= 100) {
@@ -130,7 +128,7 @@
             html2canvas(el, { scale: 3, useCORS: true, windowHeight: el.scrollHeight }).then(canvas => {
                 el.style.overflow = originalOverflow;
                 const link = document.createElement('a');
-                link.download = 'EHB-Imposter-V2.4.png';
+                link.download = 'EHB-Imposter-V2.5.png';
                 link.href = canvas.toDataURL();
                 link.click();
             });
